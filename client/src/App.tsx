@@ -7,7 +7,8 @@ import './App.css';
 
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
-import Login from './pages/Login';
+// import Login from './pages/Login';
+import LoginRegister from './pages/LoginRegister';
 import Signup from './pages/Signup';
 import ToggleModeProvider from './context/modeContext';
          
@@ -19,10 +20,10 @@ function App() {
       <CssBaseline />
           <Switch>
           <Box>
-            <Route exact path="/login" component={Login} />
+            <Route exact path="/login" component={LoginRegister} />
             <Route exact path="/signup" component={Signup} />
-            <Navbar />
             <Route exact path="/" >
+              <Navbar />
               <Home />
             </Route>
           </Box>
