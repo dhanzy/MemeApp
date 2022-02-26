@@ -37,9 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'api',
     'corsheaders',
     'rest_framework',
+    'rest_framework.authtoken',
+    'rest_framework_simplejwt',
+    'djoser',
+    'user'
 ]
 
 MIDDLEWARE = [
@@ -132,3 +135,33 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ORIGIN_WHITELIST = [
      'http://localhost:3000'
 ]
+
+REST_FRAMEWORK = {
+    'DATE_FORMATS': [("%d-%m-%Y"),],
+    'DATE_INPUT_FORMATS': [("%d-%m-%Y"),],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
+
+DJOSER = {
+    'SERIALIZERS': {
+        'user': 'user.serializers.UserSerializer',
+        'current_user': 'user.serializers.UserSerializer',
+        # 'user_create': 'user.serializers.ProfileSerializer',
+    },
+    'PERMISSIONS' : {
+        'user': ['rest_framework.permissions.IsAdminUser']
+    },
+}
+
+
+
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=10),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+}
