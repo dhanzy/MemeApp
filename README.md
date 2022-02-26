@@ -17,6 +17,41 @@ This is a little description about our project.
 2. Create your enviroment variable (.env) file
 3. Run `python3 manage.py runserver` to start the server
 
+### Register api endpoint
+register url -> http://127.0.0.1:8000/auth/users/
+
+Post method to create new user
+
+set "is_staff" to true if you want the user to be an admin
+
+{
+    "user": {
+        "first_name": "",
+        "last_name": "",
+        "username": "faith",
+        "email": "",
+        "is_staff": true
+    },
+    "date_of_birth": null,
+    "gender": ""
+}
+
+Get method to get list of user. Only an admin can get the list of users response
+
+### Login api endpoint
+
+login url -> http://127.0.0.1:8000/auth/token/login/
+
+Post method only
+
+{
+    "username" : "",
+    "password" : ""
+}
+
+You will get a token as a response
+
+
 ---
 
 ## client
