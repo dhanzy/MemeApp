@@ -54,10 +54,15 @@ Post method only
 
 You will get a token as a response
 
+### Current user details
+
+endpoint -> http://127.0.0.1:8000/auth/users/me/
+
 #### Api
  When making a request, the authorization header should be something like this
  
  'Authorization: Token b704c9fc3655635646356ac2950269f352ea1139'
+
 
 ---
 
