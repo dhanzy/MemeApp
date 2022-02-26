@@ -24,6 +24,7 @@ Post method to create new user
 
 set "is_staff" to true if you want the user to be an admin
 
+`
 {
     "user": {
         "first_name": "",
@@ -35,6 +36,7 @@ set "is_staff" to true if you want the user to be an admin
     "date_of_birth": null,
     "gender": ""
 }
+`
 
 Get method to get list of user. Only an admin can get the list of users response
 
@@ -43,11 +45,12 @@ Get method to get list of user. Only an admin can get the list of users response
 login url -> http://127.0.0.1:8000/auth/token/login/
 
 Post method only
-
+`
 {
     "username" : "",
     "password" : ""
 }
+`
 
 You will get a token as a response
 
