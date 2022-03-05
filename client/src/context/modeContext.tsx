@@ -3,6 +3,8 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { useMediaQuery } from '@mui/material';
 import { grey } from '@mui/material/colors';
 
+import { AuthProvider } from './useAuthContext';
+
 const toggleModeContext = React.createContext({ toggleColorMode: () => {} });
 
 
@@ -55,7 +57,9 @@ const ToggleModeProvider: React.FC = ({children}) => {
   return (
     <toggleModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
-        { children }
+        <AuthProvider>
+          { children }
+        </AuthProvider>
       </ThemeProvider>
     </toggleModeContext.Provider>
   );

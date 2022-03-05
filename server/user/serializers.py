@@ -56,7 +56,7 @@ class UserSerializer(serializers.ModelSerializer):
 class ProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer()
 
-    date_of_birth = serializers.DateField(required=True, format="%d-%m-%Y")
+    date_of_birth = serializers.DateField(required=False, format="%d-%m-%Y")
 
     # gender = serializers.CharField(
     #     required=True,

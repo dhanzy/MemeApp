@@ -1,15 +1,16 @@
 import React from 'react'
-import { AppBar, Button, Container, IconButton, Toolbar,  InputBase } from '@mui/material';
+import { AppBar, Button, Container, IconButton, Toolbar,  InputBase, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { styled, alpha, useTheme } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
+import { Link } from 'react-router-dom';
 
 
 import { useToggleModeContext } from '../context/modeContext';
-import { Link } from 'react-router-dom';
+import { useAuthContext } from '../context/useAuthContext';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -49,6 +50,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const Navbar = () => {
     const theme = useTheme()
     const colorMode = useToggleModeContext();
+    const { loggedInUser } = useAuthContext()
     return (
         <AppBar>
             <Container maxWidth="lg">
@@ -66,8 +68,14 @@ const Navbar = () => {
                     <IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
                         {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
                     </IconButton>
-                    <Button component={Link} color='inherit' to="/login" sx={{marginRight: '15px'}}>Upload</Button>
-                    <Button component={Link} to="/login" color='primary' variant="contained">Login</Button>
+                    {loggedInUser ? (
+                        <>
+                            <Button component={Link} color='inherit' to="/login" sx={{marginRight: '15px'}}>Upload</Button>
+                            <Typography component="p">{loggedInUser?.user.username}</Typography>
+                        </>
+                    ) : (
+                        <Button component={Link} to="/login" color='primary' variant="contained">Login</Button>
+                    )}
                 </Toolbar>
             </Container>
         </AppBar>

@@ -1,18 +1,17 @@
-import LoginRegister from "../../pages/LoginRegister";
-import Signup from "../../pages/Signup";
+import { Navigate } from 'react-router-dom';
 
-const MainRoutes = {
+import User from '../../interface/User';
+import LoginRegister from "../../pages/LoginRegister";
+
+const MainRoutes = (loggedInUser: User | undefined | null) =>  ({
     path: '/',
+    element: loggedInUser && <Navigate to="/" />,
     children: [
         {
             path: '/login',
             element: <LoginRegister />
-        },
-        {
-            path: '/signup',
-            element: <Signup />
         }
     ]
-}
+})
 
 export default MainRoutes;

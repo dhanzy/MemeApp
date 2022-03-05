@@ -35,13 +35,7 @@ const Sidebar = () => {
                             <Avatar />
                         </ListItemAvatar>
                         <ListItemText primary="tiwasavage999"
-                            secondary={
-                                <React.Fragment>
-                                    <Typography>
-                                        Tiwa Savage
-                                    </Typography>
-                                </React.Fragment>
-                            }
+                            secondary="Tiwa Savage"
                         />
                     </ListItemButton>
                 </ListItem>
@@ -52,13 +46,7 @@ const Sidebar = () => {
                             <Avatar />
                         </ListItemAvatar>
                         <ListItemText primary="funkeakindele"
-                            secondary={
-                                <React.Fragment>
-                                    <Typography>
-                                        Funke Akindele
-                                    </Typography>
-                                </React.Fragment>
-                            }
+                            secondary="Funke Akindele"
                         />
                     </ListItemButton>
                 </ListItem>

@@ -1,6 +1,9 @@
 import React from 'react'
 import { Box, Button, CardMedia, styled, Typography } from '@mui/material';
+import { FormikHelpers } from 'formik';
 
+import { login, register, loadUser } from '../../APICalls/auth';
+import { useAuthContext } from '../../context/useAuthContext';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
 
@@ -89,6 +92,7 @@ const Sign = styled(Box)(({theme}) => ({
    padding: '0 5rem',
    transition: '1s 0.7s ease-in-out',
    overflow: 'hidden',
+   zIndex: 5,
    '& form': {
         display: 'flex',
         alignItems: 'center',
@@ -163,6 +167,47 @@ const Content = styled(Box)(()=> ({
 }))
 
 const LoginRegister = () => {
+    const { updateLoginContext, loggedInUser } = useAuthContext()
+    const loginHandleSubmit = (
+        {username, password}: {username:string, password: string},
+        { setSubmitting }: FormikHelpers<{username: string, password: string}>
+    ) => {
+        login(username, password).then(
+            (data) => {
+                if (data.auth_token){
+                    loadUser(data.auth_token).then(
+                        (data) => {
+                            if (data.detail) {
+                                console.log(data.detail)
+                                setSubmitting(false)
+                            }
+                            else {
+                                updateLoginContext(data)
+                                setSubmitting(false)
+                            }
+                        }
+                    )
+                }
+                else {
+                    console.log("Error occured during login")
+                    setSubmitting(false)
+                }
+            }
+        )
+    }
+
+    const registerHandleSubmit = (
+        {firstname, lastname, email, username, password}: {firstname: string, lastname: string, email: string, username: string, password: string},
+        { setSubmitting }: FormikHelpers<{firstname: string, lastname: string, email: string, username: string, password: string}>
+    ) => {
+        register(firstname, lastname, username, email, password).then(
+            (data) => {
+                updateLoginContext(data)
+                setSubmitting(false)
+            }
+        )
+    }
+    
     const container = React.useRef<HTMLDivElement>()
 
     const loginSwitch = ()=>{
@@ -176,8 +221,8 @@ const LoginRegister = () => {
         <Container ref={container}>
             <FormsContainer>
                 <Sign className="sigin-signup">
-                    <LoginForm />
-                    <RegisterForm />
+                    <LoginForm handleSubmit={loginHandleSubmit} />
+                    <RegisterForm handleSubmit={registerHandleSubmit} />
                 </Sign>
             </FormsContainer>
             <PanelContainer>
