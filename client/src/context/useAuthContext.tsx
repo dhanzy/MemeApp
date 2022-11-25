@@ -1,7 +1,6 @@
 import React from 'react';
 
 import User from '../interface/User';
-import { AuthApiData } from '../interface/AuthApiData';
 
 interface IAuthContext {
     loggedInUser: User |null | undefined;
@@ -20,7 +19,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     const updateLoginContext = React.useCallback((data: User) => {
         setLoggedInUser(data)
         console.log(`LoggedIn User ${loggedInUser}`)
-    }, [])
+    }, [loggedInUser])
     const logout = React.useCallback(async () => {
         setLoggedInUser(null)
     }, [])
